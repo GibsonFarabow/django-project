@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<title> Home </title>
+</head>
+<style>
+body{
+font-family: Arial, Helvetica, sans-serif; background-color: #FAF9F6; text-align: center;
+}
+
+
+</style>
+<body>
+	<h1>Chapel Hill Alcoholic Drinks DB</h1>
+	<p id="chad_t"> This is a proof-of-concept database that contains information about cocktails and drinks. A full fledged DB like this could help people learn how to make drinks, as well as see which drinks they might want to avoid because of a dietary restriction.</p>
+	<p id="chad_t">I built this site with Python and Django from the database I made for a class project (and this page doesn't show the many-to-many tables and some others).</p> 
+	 <p id="chad_t">Click <a href="page2.html">here</a> to see the results of sample Django queries.
+	</p>
+
+<div>
+	<h3> Cocktails </h3> 
+	<table id="chad_t">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Drink</th>
+				<th>Restaurant</th>
+				<th>Price</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for drink in drinks %}
+			<tr>
+				<!-- add a count <th scope="row">{{drink.id}}</th> -->
+				<td style="text-align: center">{{forloop.counter}}</td>
+				<td>{{drink.drink_name}}</td>
+				<td>{{drink.establishment.establishment_name}}</td>
+				<td>${{drink.drink_price}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+<div>
+	<h3> Restaurants/Bars </h3> 
+	<table id="chad_t">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Establishment</th>
+				<th>Location</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for e in estab %}
+			<tr>
+				<!-- add a count <th scope="row">{{drink.id}}</th> -->
+				<td style="text-align: center">{{forloop.counter}}</td>
+				<td>{{e.establishment_name}}</td>
+				<td>{{e.establishment_loc}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<div class='common'>
+<h3> Common Drinks </h3> 
+	<table id="chad_t">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Drink</th>
+				<th>Alcohol content abv</th>
+				<th>Price</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for drink in cd %}
+			<tr>
+				<!-- add a count <th scope="row">{{drink.id}}</th> -->
+				<td style="text-align: center">{{forloop.counter}}</td>
+				<td>{{drink.common_drink_name}}</td>
+				<td>{{drink.alc_content_abv}}%</td>
+				<td>${{drink.common_drink_price}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<div class='flexbox'>
+	<h3> Dietary Restrictions </h3>
+			<table id="chad_t">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Restriction</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for d in diets %}
+			<tr>
+				<!-- add a count <th scope="row">{{drink.id}}</th> -->
+				<td>{{forloop.counter}}</td>
+				<td>{{d.diet_name}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<h3>Drink Ingredients</h3>
+		<table id="chad_t">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Drink Attribute</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for a in attr %}
+			<tr>
+				<!-- add a count <th scope="row">{{drink.id}}</th> -->
+				<td>{{forloop.counter}}</td>
+				<td>{{a.drink_att}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

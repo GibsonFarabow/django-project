@@ -1,0 +1,172 @@
+{% load static %}
+{% load join_drinks %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<title> Home </title>
+</head>
+<body>
+	<h1>Chapel Hill Alcoholic Drinks DB</h1>
+
+<label for="attributes"> Select a drink to see its ingredients </label>
+<select class="dropdown" onchange="myFunction();" id="drink" name="attributes">
+	<option style="text-align: center;">--- Select Drink ---</option>
+	{% for drink in drinks %}
+	<option>{{drink.drink_name}}</option>
+	{% endfor %}
+</select>
+<br><br>
+
+
+<script>
+function myFunction(){
+	x = document.getElementsByClassName("hidden");
+	    for(var i = 0; i < x.length; i++){
+    x[i].style.display="none";}
+
+    z = document.getElementById("drink").value;
+    document.getElementById(z).style.display="block";
+    }
+</script>
+
+
+<div>
+<div id="Carolina Collins" class="hidden" style="display: none">
+	<table id="chad_t" class="chad_att" style="width:15%">
+		<thead>
+			<tr>
+				<th style="background-color: green; color: white">Ingredients</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for a in 'Carolina Collins'|drink_query %}
+			<tr>
+				<td>{{a}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<div id="Grapefruit Sup Crush" class="hidden"  style="display: none">
+	<table id="chad_t" style="width: 15%;">
+		<thead>
+			<tr>
+				<th style="background-color: green; color: white">Ingredients</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for a in 'Grapefruit Sup Crush'|drink_query %}
+			<tr>
+				<td>{{a}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<div id="Linda's 76" class="hidden"  style="display: none">
+	<table id="chad_t" style="width: 15%;">
+		<thead>
+			<tr>
+				<th style="background-color: green; color: white">Ingredients</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for a in "Linda's 76"|drink_query %}
+			<tr>
+				<td>{{a}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<div id="Mango Margarita" class="hidden"  style="display: none">
+	<table id="chad_t" style="width: 15%;">
+		<thead>
+			<tr>
+				<th style="background-color: green; color: white">Ingredients</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for a in "Mango Margarita"|drink_query %}
+			<tr>
+				<td>{{a}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<div id="Orange Sup Crush" class="hidden"  style="display: none">
+	<table id="chad_t" style="width: 15%;">
+		<thead>
+			<tr>
+				<th style="background-color: green; color: white"> Ingredients</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for a in "Orange Sup Crush"|drink_query %}
+			<tr>
+				<td>{{a}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<div id="Paloma Fresca" class="hidden"  style="display: none">
+	<table id="chad_t" style="width: 15%;">
+		<thead>
+			<tr>
+				<th style="background-color: green; color: white">Ingredients</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for a in "Paloma Fresca"|drink_query %}
+			<tr>
+				<td>{{a}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+</div>
+
+<!-- <buttton type="button" onclick="myFunction()">click</buttton> -->
+
+<div>
+	<h3> Each Dietary Restriction for Each Drink
+		<span id="chad_t" style="text-align: right; font-size: small; font-style:normal; font-weight: normal;">
+		(<a href="index.html">go back</a>)</span>
+	</h3> 
+	<table id="chad_t">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Drink</th>
+				<th>Restaurant</th>
+				<th>Dietary Restriction</th>
+				<th>Price</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for drink in dbq1 %}
+			<tr>
+				<!-- add a count <th scope="row">{{drink.id}}</th> -->
+				<td style="text-align: center">{{forloop.counter}}</td>
+				<td>{{drink.drink}}</td>
+				<td>{{drink.restaurant}}</td>
+				<td>{{drink.rest}}</td>
+				<td>${{drink.price}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+<br>
+</body>
+</html>
